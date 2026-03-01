@@ -26,54 +26,8 @@ author:
   employer: "London School of Economics"
   email  : "x.sun28@lse.ac.uk"
 
-  # Academic websites
-  academia         :
-  arxiv            :
-  googlescholar    :
-  inspire-hep      :
-  impactstory      :
-  orcid            :
-  semantic         :
-  ssrn             :
-  pubmed           :
-  researchgate     :
-  scopus           :
-  zotero           :
+ 
 
-  # Repositories and software development
-  bitbucket        :
-  codepen          :
-  dribbble         :
-  github           :
-  kaggle           :
-  stackoverflow    :
-
-  # Social media
-  artstation       :
-  bluesky          :
-  facebook         :
-  flickr           :
-  foursquare       :
-  goodreads        :
-  google_plus      :
-  keybase          :
-  instagram        :
-  lastfm           :
-  linkedin         :
-  mastodon         :
-  medium           :
-  pinterest        :
-  soundcloud       :
-  steam            :
-  telegram         :
-  tumblr           :
-  twitter          :
-  vine             :
-  weibo            :
-  wikipedia        :
-  xing             :
-  youtube          :
-  zhihu            :
 
 # Publication Category
 publication_category:
