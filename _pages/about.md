@@ -20,6 +20,3 @@ You can reach me at [x.sun28@lse.ac.uk](mailto:x.sun28@lse.ac.uk).
 - **MSc in Economics**, London School of Economics (2021, Distinction)
 - **BA in Accounting & BA in Finance**, Shanghai University of Finance and Economics (2019, Excellent Graduate)
 
-## Contact
-
-You can reach me at [x.sun28@lse.ac.uk](mailto:x.sun28@lse.ac.uk).
