@@ -38,5 +38,8 @@
 
     "vendor/font-awesome/fontawesome",
     "vendor/font-awesome/solid",
-    "vendor/font-awesome/brands"
+    "vendor/font-awesome/brands",
+
+    // Site-specific overrides. Imported last so it wins over the template.
+    "site"
 ;

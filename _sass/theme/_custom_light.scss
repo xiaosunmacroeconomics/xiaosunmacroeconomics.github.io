@@ -1,0 +1,75 @@
+/* ==========================================================================
+    CUSTOM THEME - LIGHT VERSION
+    --------------------------------------------------------------------------
+    A restrained palette for an academic homepage: a slightly warm off-white
+    page, near-black text, and a single deep blue-teal accent used for links.
+    Link and body colours clear WCAG AA against the page background.
+    ========================================================================== */
+
+/* Ink */
+$ink                        : #24262b;   // body text
+$ink-muted                  : #4f5762;   // nav, captions, secondary text
+$ink-footer                 : #5f6874;   // footer copy, 5.2:1 on the footer ground
+$ink-soft                   : #8a919b;   // the lightest text still in use
+
+/* Accent */
+$accent                     : #16607e;   // links, 6.9:1 on the page background
+$accent-dark                : #0e4257;   // hover
+$accent-tint                : #cfe4ee;   // text selection
+
+/* Surfaces */
+$page                       : #fdfdfc;
+$surface                    : #f6f5f2;   // footer, code blocks, table of contents
+$surface-alt                : #f0efeb;   // table headers
+$rule                       : #e5e3dd;   // hairlines
+$rule-strong                : #cfccc5;
+
+/* Status colours (notices, buttons) */
+$danger-color               : #c0392b;
+$info-color                 : $accent;
+$notice-color               : $ink-muted;
+$success-color              : #2f7d4f;
+$warning-color              : #b7791f;
+
+/* Structural settings shared with the dark theme */
+$border-radius              : 3px;
+$box-shadow                 : 0 1px 2px rgba(0, 0, 0, 0.06);
+$global-transition          : all 0.2s ease-in-out;
+$masthead-height            : 70px;
+$navicon-width              : 28px;
+$navicon-height             : 4px;
+$sidebar-link-max-width     : 260px;
+$sidebar-screen-min-width   : 1024px;
+
+:root {
+    --global-base-color                 : #{$accent};
+    --global-bg-color                   : #{$page};
+    --global-footer-bg-color            : #{$surface};
+    --global-border-color               : #{$rule};
+    --global-dark-border-color          : #{$rule-strong};
+    --global-code-background-color      : #{$surface};
+    --global-code-text-color            : #{$ink};
+    --global-fig-caption-color          : #{$ink-muted};
+    --global-link-color                 : #{$accent};
+    --global-link-color-hover           : #{$accent-dark};
+    --global-link-color-visited         : #{$accent};
+    --global-masthead-link-color        : #{$ink-muted};
+    --global-masthead-link-color-hover  : #{$accent};
+    --global-text-color                 : #{$ink};
+    --global-text-color-light           : #{$ink-soft};
+    --global-thead-color                : #{$surface-alt};
+    --global-footer-text-color          : #{$ink-footer};
+    --global-toc-bg-color               : #{$surface};
+    --global-selection-bg-color         : #{$accent-tint};
+    --global-selection-text-color       : #{$ink};
+}
+
+::selection {
+  background-color: var(--global-selection-bg-color);
+  color: var(--global-selection-text-color);
+}
+
+::-moz-selection {
+  background-color: var(--global-selection-bg-color);
+  color: var(--global-selection-text-color);
+}

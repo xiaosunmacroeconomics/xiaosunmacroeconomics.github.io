@@ -1,0 +1,246 @@
+/* ==========================================================================
+   SITE REFINEMENTS
+   --------------------------------------------------------------------------
+   Imported last, so everything here deliberately overrides the template.
+   Kept in one file to make it obvious what has been changed from stock
+   Academic Pages and to keep future template updates easy to merge.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Reading comfort
+   -------------------------------------------------------------------------- */
+
+body {
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings: serif, a touch tighter than the body and clearly separated from
+   the paragraph above. */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.page__content {
+  /* Roughly 70 characters - long enough for a paper abstract, short enough
+     that the eye finds the next line without effort. */
+  max-width: 38em;
+
+  h2 {
+    margin-top: 2.2em;
+    padding-bottom: 0.35em;
+    font-size: $type-size-3;
+  }
+
+  /* A page whose body opens on a heading should not carry that full gap
+     under the page title as well. */
+  > h2:first-child,
+  > h3:first-child {
+    margin-top: 0;
+  }
+
+  h3 {
+    margin-top: 1.8em;
+    font-size: $type-size-4;
+  }
+
+  h4, h5, h6 {
+    margin-top: 1.6em;
+    font-size: $type-size-5;
+  }
+
+  /* The template sets h4-h6 at 12px, which is smaller than body copy. */
+  h4 { text-transform: none; letter-spacing: 0; }
+
+  p, li {
+    line-height: 1.65;
+  }
+
+  li {
+    margin-bottom: 0.4em;
+  }
+
+  ul, ol {
+    padding-left: 1.4em;
+  }
+
+  /* Underlines that sit clear of descenders instead of cutting through them. */
+  a {
+    text-underline-offset: 0.16em;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--global-dark-border-color);
+    transition: color 0.15s ease-in-out, text-decoration-color 0.15s ease-in-out;
+
+    &:hover {
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+.page__title {
+  font-size: $type-size-2;
+  line-height: 1.15;
+  margin-bottom: 0.8em;
+}
+
+/* --------------------------------------------------------------------------
+   Masthead
+   -------------------------------------------------------------------------- */
+
+.masthead__inner-wrap {
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+}
+
+.masthead__menu-item {
+  a {
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+
+  &--lg {
+    letter-spacing: 0.01em;
+    font-family: $serif;
+    font-size: $type-size-5;
+    padding-right: 1.25em;
+
+    a {
+      color: var(--global-text-color);
+    }
+
+    /* Keep the name small enough on phones that both nav links still fit
+       beside it rather than collapsing into the overflow menu. */
+    @include breakpoint($medium) {
+      font-size: $type-size-4;
+      padding-right: 2em;
+    }
+  }
+}
+
+/* The template marks the current page with a heavy underline on every item,
+   including the site name on the homepage; keep it to the nav links. */
+.masthead__menu-item--lg.selected a {
+  border-bottom-color: transparent;
+}
+
+/* Tighten the gaps between nav links on phones - at 1rem a side the two links
+   plus the name overflow and one of them falls into the overflow menu. */
+@media screen and (max-width: 600px) {
+  .greedy-nav a {
+    margin: 0 0.6rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Author profile (sidebar)
+   -------------------------------------------------------------------------- */
+
+.author__avatar img {
+  max-width: 210px;
+  /* The portrait is 3:4, so a circular mask would crop it; round the corners
+     instead and show the photograph as it was taken. */
+  border-radius: 4px;
+
+  @include breakpoint($large) {
+    padding: 0;
+    border: 1px solid var(--global-border-color);
+  }
+}
+
+.sidebar .author__name {
+  font-family: $serif;
+  font-size: $type-size-4;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.author__bio {
+  color: var(--global-text-color);
+}
+
+.author__urls {
+  /* "London School of Economics" is wider than the sidebar column, and the
+     template clips it rather than wrapping. */
+  li {
+    white-space: normal;
+    line-height: 1.4;
+    margin-bottom: 0.55em;
+  }
+
+  a {
+    margin-bottom: 0;
+  }
+
+  /* Keep the icon in its own column so wrapped lines stay aligned. */
+  .icon-pad-right {
+    margin-right: 0.15em;
+  }
+}
+
+.sidebar {
+  p, li {
+    font-size: $type-size-7;
+  }
+
+  @include breakpoint($large) {
+    padding-right: 1.5em;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.page__footer {
+  font-size: $type-size-7;
+  /* The template reuses the de-emphasis grey here, which falls below 3:1
+     against the footer background. */
+  color: var(--global-footer-text-color);
+
+  .fas, .fab, .far, .fal {
+    color: var(--global-footer-text-color);
+  }
+
+  footer {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Focus and motion
+   -------------------------------------------------------------------------- */
+
+/* Visible keyboard focus - the template relies on the browser default, which
+   the reset removes. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--global-link-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* The template fades the page in after a 0.35s delay, so the content is blank
+   for a third of a second on every navigation. Show it immediately. */
+#main {
+  animation-delay: 0s;
+  animation-duration: 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

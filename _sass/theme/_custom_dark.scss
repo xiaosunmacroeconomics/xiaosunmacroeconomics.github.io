@@ -1,0 +1,65 @@
+/* ==========================================================================
+    CUSTOM THEME - DARK VERSION
+    --------------------------------------------------------------------------
+    The light palette inverted onto a deep neutral ground rather than the
+    mid-grey the template ships with, so text keeps its contrast and the
+    accent stays legible. Applied when <html data-theme="dark">.
+    ========================================================================== */
+
+/* Ink */
+$ink                        : #dfe2e6;   // body text, 13:1 on the page ground
+$ink-muted                  : #a7aeb8;
+$ink-footer                 : #9aa2ad;   // footer copy, 6.4:1 on the footer ground
+$ink-soft                   : #7f8792;
+
+/* Accent */
+$accent                     : #7ec4de;   // links, 9.2:1 on the page ground
+$accent-light               : #a6d8ec;   // hover
+$accent-tint                : #234a5c;   // text selection
+
+/* Surfaces */
+$page                       : #16181b;
+$surface                    : #1c1f23;
+$surface-alt                : #22262b;
+$rule                       : #2c3036;
+$rule-strong                : #3b4048;
+
+/* Status colours (notices, buttons) */
+$danger-color               : #e07a6f;
+$info-color                 : $accent;
+$notice-color               : $ink-muted;
+$success-color              : #6cc08b;
+$warning-color              : #e0b155;
+
+/* Structural settings  -  kept identical to the light theme */
+$border-radius              : 3px;
+$box-shadow                 : 0 1px 2px rgba(0, 0, 0, 0.4);
+$global-transition          : all 0.2s ease-in-out;
+$masthead-height            : 70px;
+$navicon-width              : 28px;
+$navicon-height             : 4px;
+$sidebar-link-max-width     : 260px;
+$sidebar-screen-min-width   : 1024px;
+
+html[data-theme="dark"] {
+    --global-base-color                 : #{$accent};
+    --global-bg-color                   : #{$page};
+    --global-footer-bg-color            : #{$surface};
+    --global-border-color               : #{$rule};
+    --global-dark-border-color          : #{$rule-strong};
+    --global-code-background-color      : #{$surface};
+    --global-code-text-color            : #{$ink};
+    --global-fig-caption-color          : #{$ink-muted};
+    --global-link-color                 : #{$accent};
+    --global-link-color-hover           : #{$accent-light};
+    --global-link-color-visited         : #{$accent};
+    --global-masthead-link-color        : #{$ink-muted};
+    --global-masthead-link-color-hover  : #{$accent};
+    --global-text-color                 : #{$ink};
+    --global-text-color-light           : #{$ink-soft};
+    --global-thead-color                : #{$surface-alt};
+    --global-footer-text-color          : #{$ink-footer};
+    --global-toc-bg-color               : #{$surface};
+    --global-selection-bg-color         : #{$accent-tint};
+    --global-selection-text-color       : #{$ink};
+}
