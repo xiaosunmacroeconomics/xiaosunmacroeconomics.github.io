@@ -9,7 +9,7 @@
 /* Ink */
 $ink                        : #24262b;   // body text
 $ink-muted                  : #4f5762;   // nav, captions, secondary text
-$ink-footer                 : #5f6874;   // footer copy, 5.2:1 on the footer ground
+$ink-dim                    : #5f6874;   // footer copy and datelines, 5.2:1 on the footer ground
 $ink-soft                   : #8a919b;   // the lightest text still in use
 
 /* Accent */
@@ -58,7 +58,7 @@ $sidebar-screen-min-width   : 1024px;
     --global-text-color                 : #{$ink};
     --global-text-color-light           : #{$ink-soft};
     --global-thead-color                : #{$surface-alt};
-    --global-footer-text-color          : #{$ink-footer};
+    --global-muted-text-color           : #{$ink-dim};
     --global-toc-bg-color               : #{$surface};
     --global-selection-bg-color         : #{$accent-tint};
     --global-selection-text-color       : #{$ink};

@@ -9,7 +9,7 @@
 /* Ink */
 $ink                        : #dfe2e6;   // body text, 13:1 on the page ground
 $ink-muted                  : #a7aeb8;
-$ink-footer                 : #9aa2ad;   // footer copy, 6.4:1 on the footer ground
+$ink-dim                    : #9aa2ad;   // footer copy and datelines, 6.4:1 on the footer ground
 $ink-soft                   : #7f8792;
 
 /* Accent */
@@ -58,7 +58,7 @@ html[data-theme="dark"] {
     --global-text-color                 : #{$ink};
     --global-text-color-light           : #{$ink-soft};
     --global-thead-color                : #{$surface-alt};
-    --global-footer-text-color          : #{$ink-footer};
+    --global-muted-text-color           : #{$ink-dim};
     --global-toc-bg-color               : #{$surface};
     --global-selection-bg-color         : #{$accent-tint};
     --global-selection-text-color       : #{$ink};

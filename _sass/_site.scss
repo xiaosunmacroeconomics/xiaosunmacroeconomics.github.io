@@ -44,6 +44,26 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
   }
 
+  /* A subheading straight under a section heading is one unit, not two. */
+  h2 + h3 {
+    margin-top: 1.1em;
+  }
+
+  /* Dateline under a paper title or a teaching post: the year, the venue,
+     the dates. Muted, small, and pulled tight to the heading it belongs to. */
+  .entry-meta {
+    margin-top: -0.3em;
+    margin-bottom: 1.1em;
+    color: var(--global-muted-text-color);
+    font-size: 0.86em;
+    letter-spacing: 0.01em;
+  }
+
+  /* Under an h2 the dateline clears the section rule. */
+  h2 + .entry-meta {
+    margin-top: 0.55em;
+  }
+
   h3 {
     margin-top: 1.8em;
     font-size: $type-size-4;
@@ -201,10 +221,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: $type-size-7;
   /* The template reuses the de-emphasis grey here, which falls below 3:1
      against the footer background. */
-  color: var(--global-footer-text-color);
+  color: var(--global-muted-text-color);
 
   .fas, .fab, .far, .fal {
-    color: var(--global-footer-text-color);
+    color: var(--global-muted-text-color);
   }
 
   footer {
