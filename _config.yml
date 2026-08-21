@@ -25,49 +25,13 @@ author:
   location         : "London, UK"
   employer         : "London School of Economics"
   email            : "x.sun28@lse.ac.uk"
-  academia         :
-  arxiv            :
+  # Fill any of these in and its icon appears in the letterhead; leave blank
+  # to hide it. _includes/author-profile.html lists every service the theme
+  # can render if you need one that is not here.
   googlescholar    :
-  inspire-hep      :
-  impactstory      :
   orcid            :
-  semantic         :
   ssrn             :
-  pubmed           :
-  researchgate     :
-  scopus           :
-  zotero           :
-  bitbucket        :
-  codepen          :
-  dribbble         :
   github           :
-  kaggle           :
-  stackoverflow    :
-  artstation       :
-  bluesky          :
-  facebook         :
-  flickr           :
-  foursquare       :
-  goodreads        :
-  google_plus      :
-  keybase          :
-  instagram        :
-  lastfm           :
-  linkedin         :
-  mastodon         :
-  medium           :
-  pinterest        :
-  soundcloud       :
-  steam            :
-  telegram         :
-  tumblr           :
-  twitter          :
-  vine             :
-  weibo            :
-  wikipedia        :
-  xing             :
-  youtube          :
-  zhihu            :
 
 # Publication Category
 publication_category:
