@@ -1,60 +1,73 @@
 /* ==========================================================================
     CUSTOM THEME - DARK VERSION
+    "Econ classic, done well"
     --------------------------------------------------------------------------
-    The light palette inverted onto a deep neutral ground rather than the
-    mid-grey the template ships with, so text keeps its contrast and the
-    accent stays legible. Applied when <html data-theme="dark">.
+    The same paper, turned over. The ground is a warm near-black rather than
+    the blue-black most dark modes use, so the page still reads as ink and
+    paper rather than as a terminal. The single accent becomes a soft clay,
+    which is the oxblood lightened until it clears contrast on a dark ground.
+    Applied when <html data-theme="dark">.
+
+    Measured contrast against the page ground #1a1815:
+      ink        #e7e3da  13.83:1
+      ink-muted  #aaa49a   7.16:1
+      ink-dim    #9e988e   6.19:1
+      ink-soft   #9a9288   5.77:1
+      accent     #e09a8b   7.73:1
+      accent-lt  #efbdb0  10.61:1
+    All clear WCAG AA for body text (4.5:1).
     ========================================================================== */
 
 /* Ink */
-$ink                        : #dfe2e6;   // body text, 13:1 on the page ground
-$ink-muted                  : #a7aeb8;
-$ink-dim                    : #9aa2ad;   // footer copy and datelines, 6.4:1 on the footer ground
-$ink-soft                   : #7f8792;
+$ink                        : #e7e3da;   // body text, 13.83:1 on the page
+$ink-muted                  : #aaa49a;   // labels, tagline, section markers, 7.16:1
+$ink-dim                    : #9e988e;   // datelines, nav, footer copy, 6.19:1
+$ink-soft                   : #9a9288;   // the lightest text still in use, 5.77:1
 
-/* Accent */
-$accent                     : #7ec4de;   // links, 9.2:1 on the page ground
-$accent-light               : #a6d8ec;   // hover
-$accent-tint                : #234a5c;   // text selection
+/* Accent - the oxblood lifted to a clay that survives a dark ground */
+$accent                     : #e09a8b;   // 7.73:1 on the page
+$accent-light               : #efbdb0;   // hover, 10.61:1
+$accent-tint                : #4a2c26;   // text selection ground
 
 /* Surfaces */
-$page                       : #16181b;
-$surface                    : #1c1f23;
-$surface-alt                : #22262b;
-$rule                       : #2c3036;
-$rule-strong                : #3b4048;
+$page                       : #1a1815;   // warm near-black
+$surface                    : #221f1b;   // code blocks, table of contents
+$surface-alt                : #2a2622;   // table headers
+$rule                       : #3c3831;   // hairlines, 1.52:1 on the page
+$rule-strong                : #5c554c;   // the rules you are meant to notice, 2.41:1
 
 /* Status colours (notices, buttons) */
-$danger-color               : #e07a6f;
+$danger-color               : #e79286;
 $info-color                 : $accent;
 $notice-color               : $ink-muted;
-$success-color              : #6cc08b;
-$warning-color              : #e0b155;
+$success-color              : #86c39f;
+$warning-color              : #d9b45f;
 
 /* Structural settings  -  kept identical to the light theme */
-$border-radius              : 3px;
+$border-radius              : 2px;
 $box-shadow                 : 0 1px 2px rgba(0, 0, 0, 0.4);
-$global-transition          : all 0.2s ease-in-out;
+$global-transition          : all 0.18s ease-in-out;
 $masthead-height            : 70px;
-$navicon-width              : 28px;
-$navicon-height             : 4px;
+$navicon-width              : 24px;
+$navicon-height             : 3px;
 $sidebar-link-max-width     : 260px;
 $sidebar-screen-min-width   : 1024px;
 
 html[data-theme="dark"] {
     --global-base-color                 : #{$accent};
     --global-bg-color                   : #{$page};
-    --global-footer-bg-color            : #{$surface};
+    /* The footer is the page ground in this direction: a hairline, not a band. */
+    --global-footer-bg-color            : #{$page};
     --global-border-color               : #{$rule};
     --global-dark-border-color          : #{$rule-strong};
     --global-code-background-color      : #{$surface};
     --global-code-text-color            : #{$ink};
-    --global-fig-caption-color          : #{$ink-muted};
+    --global-fig-caption-color          : #{$ink-dim};
     --global-link-color                 : #{$accent};
     --global-link-color-hover           : #{$accent-light};
     --global-link-color-visited         : #{$accent};
-    --global-masthead-link-color        : #{$ink-muted};
-    --global-masthead-link-color-hover  : #{$accent};
+    --global-masthead-link-color        : #{$ink-dim};
+    --global-masthead-link-color-hover  : #{$ink};
     --global-text-color                 : #{$ink};
     --global-text-color-light           : #{$ink-soft};
     --global-thead-color                : #{$surface-alt};

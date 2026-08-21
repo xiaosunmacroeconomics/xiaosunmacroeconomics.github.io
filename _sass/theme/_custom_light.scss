@@ -1,60 +1,72 @@
 /* ==========================================================================
     CUSTOM THEME - LIGHT VERSION
+    "Econ classic, done well"
     --------------------------------------------------------------------------
-    A restrained palette for an academic homepage: a slightly warm off-white
-    page, near-black text, and a single deep blue-teal accent used for links.
-    Link and body colours clear WCAG AA against the page background.
+    A printed-paper palette. The ground is a warm rag-paper white rather than
+    a screen white; the text is a near-black with a trace of warmth in it; and
+    there is exactly one colour on the page, a dark oxblood, which is spent
+    almost entirely on the hairline under a link. Nothing else is coloured.
+
+    Measured contrast against the page ground #fbfaf7:
+      ink        #1f2124  15.46:1
+      ink-muted  #4a4f57   7.90:1
+      ink-dim    #5a606a   6.07:1
+      ink-soft   #676d78   4.99:1
+      accent     #8a2b22   8.21:1
+      accent-dk  #6a1e17  11.11:1
+    All clear WCAG AA for body text (4.5:1).
     ========================================================================== */
 
 /* Ink */
-$ink                        : #24262b;   // body text
-$ink-muted                  : #4f5762;   // nav, captions, secondary text
-$ink-dim                    : #5f6874;   // footer copy and datelines, 5.2:1 on the footer ground
-$ink-soft                   : #8a919b;   // the lightest text still in use
+$ink                        : #1f2124;   // body text, 15.46:1 on the page
+$ink-muted                  : #4a4f57;   // labels, tagline, section markers, 7.90:1
+$ink-dim                    : #5a606a;   // datelines, nav, footer copy, 6.07:1
+$ink-soft                   : #676d78;   // the lightest text still in use, 4.99:1
 
-/* Accent */
-$accent                     : #16607e;   // links, 6.9:1 on the page background
-$accent-dark                : #0e4257;   // hover
-$accent-tint                : #cfe4ee;   // text selection
+/* Accent - a dark oxblood, used for link rules and hover only */
+$accent                     : #8a2b22;   // 8.21:1 on the page
+$accent-dark                : #6a1e17;   // hover, 11.11:1
+$accent-tint                : #f0dcd6;   // text selection ground
 
 /* Surfaces */
-$page                       : #fdfdfc;
-$surface                    : #f6f5f2;   // footer, code blocks, table of contents
-$surface-alt                : #f0efeb;   // table headers
-$rule                       : #e5e3dd;   // hairlines
-$rule-strong                : #cfccc5;
+$page                       : #fbfaf7;   // warm rag paper
+$surface                    : #f2f0ea;   // code blocks, table of contents
+$surface-alt                : #e9e5dd;   // table headers
+$rule                       : #d8d2c6;   // hairlines, 1.44:1 on the page
+$rule-strong                : #aea695;   // the rules you are meant to notice, 2.32:1
 
 /* Status colours (notices, buttons) */
-$danger-color               : #c0392b;
+$danger-color               : #9c2b20;
 $info-color                 : $accent;
 $notice-color               : $ink-muted;
-$success-color              : #2f7d4f;
-$warning-color              : #b7791f;
+$success-color              : #2f6b45;
+$warning-color              : #8a6318;
 
 /* Structural settings shared with the dark theme */
-$border-radius              : 3px;
-$box-shadow                 : 0 1px 2px rgba(0, 0, 0, 0.06);
-$global-transition          : all 0.2s ease-in-out;
+$border-radius              : 2px;
+$box-shadow                 : 0 1px 2px rgba(0, 0, 0, 0.05);
+$global-transition          : all 0.18s ease-in-out;
 $masthead-height            : 70px;
-$navicon-width              : 28px;
-$navicon-height             : 4px;
+$navicon-width              : 24px;
+$navicon-height             : 3px;
 $sidebar-link-max-width     : 260px;
 $sidebar-screen-min-width   : 1024px;
 
 :root {
     --global-base-color                 : #{$accent};
     --global-bg-color                   : #{$page};
-    --global-footer-bg-color            : #{$surface};
+    /* The footer is the page ground in this direction: a hairline, not a band. */
+    --global-footer-bg-color            : #{$page};
     --global-border-color               : #{$rule};
     --global-dark-border-color          : #{$rule-strong};
     --global-code-background-color      : #{$surface};
     --global-code-text-color            : #{$ink};
-    --global-fig-caption-color          : #{$ink-muted};
+    --global-fig-caption-color          : #{$ink-dim};
     --global-link-color                 : #{$accent};
     --global-link-color-hover           : #{$accent-dark};
     --global-link-color-visited         : #{$accent};
-    --global-masthead-link-color        : #{$ink-muted};
-    --global-masthead-link-color-hover  : #{$accent};
+    --global-masthead-link-color        : #{$ink-dim};
+    --global-masthead-link-color-hover  : #{$ink};
     --global-text-color                 : #{$ink};
     --global-text-color-light           : #{$ink-soft};
     --global-thead-color                : #{$surface-alt};

@@ -1,256 +1,759 @@
 /* ==========================================================================
-   SITE REFINEMENTS
+   SITE LAYER - "ECON CLASSIC, DONE WELL"
    --------------------------------------------------------------------------
    Imported last, so everything here deliberately overrides the template.
-   Kept in one file to make it obvious what has been changed from stock
-   Academic Pages and to keep future template updates easy to merge.
+
+   The idea in one sentence: throw away the website furniture and set the page
+   like a printed working paper. One centred column, about 68 characters wide.
+   Body copy in the OS transitional serif, so an abstract reads the way an
+   abstract reads on paper. Sans is demoted to a single job - small tracked
+   uppercase labels for the things that are not prose: the nav, the section
+   markers, the datelines, the footer. Colour appears only as the hairline
+   under a link. The portrait shrinks to a 76px letterhead stamp beside the
+   name instead of owning a column.
+
+   Structurally this file does three things the stock template does not:
+     1. Collapses the two-column (sidebar + article) grid into one centred
+        column at every breakpoint.
+     2. Re-flows the author profile into a horizontal letterhead: small
+        portrait, name, tracked tagline, and a middot-separated contact line.
+     3. Unpins the masthead so it scrolls away as a quiet running head.
+   All of it is CSS over the existing Liquid. No layout or include is touched.
    ========================================================================== */
 
+
 /* --------------------------------------------------------------------------
-   Reading comfort
+   0. The measure
+   --------------------------------------------------------------------------
+   The root font-size is 16px on phones and 18px from $medium up (set in
+   _reset.scss), so every rem below scales with it. 37rem at the desktop root
+   is 666px; minus the 1.4rem gutters that leaves about 615px of text, which
+   is roughly 68 characters of Charter at 18px - the width a journal sets an
+   abstract to.
+   -------------------------------------------------------------------------- */
+
+$measure: 37rem;
+$gutter: 1.4rem;
+
+
+/* --------------------------------------------------------------------------
+   1. Page shell
    -------------------------------------------------------------------------- */
 
 body {
-  line-height: 1.65;
+  /* The masthead is no longer fixed, so the reserved strip goes. */
+  padding-top: 0;
+  padding-bottom: 8em;
+  font-family: $serif;
+  line-height: 1.62;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings: serif, a touch tighter than the body and clearly separated from
-   the paragraph above. */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-  text-wrap: balance;
-}
+#main {
+  max-width: $measure;
+  margin: 0 auto;
+  padding: 1.8rem $gutter 0;
+  animation-delay: 0s;
+  animation-duration: 0.2s;
 
-.page__content {
-  /* Roughly 70 characters - long enough for a paper abstract, short enough
-     that the eye finds the next line without effort. */
-  max-width: 38em;
-
-  h2 {
-    margin-top: 2.2em;
-    padding-bottom: 0.35em;
-    font-size: $type-size-3;
-  }
-
-  /* A page whose body opens on a heading should not carry that full gap
-     under the page title as well. */
-  > h2:first-child,
-  > h3:first-child {
-    margin-top: 0;
-  }
-
-  /* A subheading straight under a section heading is one unit, not two. */
-  h2 + h3 {
-    margin-top: 1.1em;
-  }
-
-  /* Dateline under a paper title or a teaching post: the year, the venue,
-     the dates. Muted, small, and pulled tight to the heading it belongs to. */
-  .entry-meta {
-    margin-top: -0.3em;
-    margin-bottom: 1.1em;
-    color: var(--global-muted-text-color);
-    font-size: 0.86em;
-    letter-spacing: 0.01em;
-  }
-
-  /* Under an h2 the dateline clears the section rule. */
-  h2 + .entry-meta {
-    margin-top: 0.55em;
-  }
-
-  h3 {
-    margin-top: 1.8em;
-    font-size: $type-size-4;
-  }
-
-  h4, h5, h6 {
-    margin-top: 1.6em;
-    font-size: $type-size-5;
-  }
-
-  /* The template sets h4-h6 at 12px, which is smaller than body copy. */
-  h4 { text-transform: none; letter-spacing: 0; }
-
-  p, li {
-    line-height: 1.65;
-  }
-
-  li {
-    margin-bottom: 0.4em;
-  }
-
-  ul, ol {
-    padding-left: 1.4em;
-  }
-
-  /* Underlines that sit clear of descenders instead of cutting through them. */
-  a {
-    text-underline-offset: 0.16em;
-    text-decoration-thickness: 1px;
-    text-decoration-color: var(--global-dark-border-color);
-    transition: color 0.15s ease-in-out, text-decoration-color 0.15s ease-in-out;
-
-    &:hover {
-      text-decoration-color: currentColor;
-    }
+  @include breakpoint($x-large) {
+    max-width: $measure;
   }
 }
 
-.page__title {
-  font-size: $type-size-2;
-  line-height: 1.15;
-  margin-bottom: 0.8em;
+/* Undo the susy 10-of-12 float. The article is simply the column. */
+.page {
+  float: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  clear: both;
+
+  @include breakpoint($large) {
+    float: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 }
+
 
 /* --------------------------------------------------------------------------
-   Masthead
+   2. Masthead - a running head, not a bar
+   --------------------------------------------------------------------------
+   Unpinned, unbordered, and set in the same small tracked uppercase as every
+   other label on the page. The site name is the first item and doubles as the
+   home link; the current page is simply the one in full ink.
    -------------------------------------------------------------------------- */
 
+.masthead {
+  position: static;
+  background: transparent;
+  animation-delay: 0s;
+
+  &::after {
+    display: none;
+  }
+}
+
 .masthead__inner-wrap {
-  padding-top: 0.75em;
-  padding-bottom: 0.75em;
+  max-width: $measure;
+  margin: 0 auto;
+  padding: 1.7rem $gutter 0;
+  font-family: $sans-serif;
+
+  @include breakpoint($x-large) {
+    max-width: $measure;
+  }
 }
 
 .masthead__menu-item {
-  a {
-    padding-bottom: 2px;
-    border-bottom: 2px solid transparent;
-    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-  }
+  background-color: transparent;
+  font-weight: 400;
 
   &--lg {
-    letter-spacing: 0.01em;
-    font-family: $serif;
-    font-size: $type-size-5;
-    padding-right: 1.25em;
+    padding-right: 0;
+    font-weight: 400;
+  }
+}
 
-    a {
-      color: var(--global-text-color);
-    }
+.greedy-nav {
+  background: transparent;
+  min-width: 0;
 
-    /* Keep the name small enough on phones that both nav links still fit
-       beside it rather than collapsing into the overflow menu. */
+  a {
+    margin: 0 0.55rem;
+    padding: 0.35rem 0;
+    font-family: $sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: var(--global-masthead-link-color);
+    border-bottom: 0;
+
     @include breakpoint($medium) {
-      font-size: $type-size-4;
-      padding-right: 2em;
+      margin: 0 0.85rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.11em;
     }
   }
-}
 
-/* The template marks the current page with a heavy underline on every item,
-   including the site name on the homepage; keep it to the nav links. */
-.masthead__menu-item--lg.selected a {
-  border-bottom-color: transparent;
-}
+  .visible-links {
+    li:first-child {
+      font-weight: 400;
+    }
 
-/* Tighten the gaps between nav links on phones - at 1rem a side the two links
-   plus the name overflow and one of them falls into the overflow menu. */
-@media screen and (max-width: 600px) {
-  .greedy-nav a {
-    margin: 0 0.6rem;
+    /* The template reveals a 4px slab under a hovered nav item. One pixel of
+       the accent is enough, and it matches the link rule used in the prose. */
+    a:before {
+      height: 1px;
+      background: var(--global-link-color);
+    }
+  }
+
+  .hidden-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  button {
+    background-color: transparent;
   }
 }
+
+/* The current page: ink, no slab. */
+.masthead__menu-item.selected a,
+.masthead__menu-item.selected a:hover {
+  color: var(--global-text-color);
+  font-weight: 600;
+  border-bottom: 0;
+}
+
+#theme-toggle a {
+  font-size: 0.78rem;
+  color: var(--global-masthead-link-color);
+
+  &:before {
+    display: none;
+  }
+}
+
 
 /* --------------------------------------------------------------------------
-   Author profile (sidebar)
+   3. Letterhead (the re-flowed author profile)
+   --------------------------------------------------------------------------
+   The template renders the profile as a fixed left column 260px wide with a
+   210px portrait in it. Here it becomes a horizontal block at the head of the
+   column: a small portrait, the name in serif, the position in tracked
+   uppercase, then a single contact line. One hairline closes it.
    -------------------------------------------------------------------------- */
 
-.author__avatar img {
-  max-width: 210px;
-  /* The portrait is 3:4, so a circular mask would crop it; round the corners
-     instead and show the photograph as it was taken. */
-  border-radius: 4px;
+.sidebar {
+  float: none;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  overflow: visible;
+  position: static;
+  opacity: 1;
+  padding: 0 0 1.5rem;
+  margin: 0 0 2.5rem;
+  border-bottom: 1px solid var(--global-dark-border-color);
+  -webkit-transform: none;
+          transform: none;
+
+  @media (orientation: portrait) {
+    margin-top: 0;
+  }
+
+  @media screen and (min-width: $sidebar-screen-min-width) {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding-top: 0;
+  }
+}
+
+/* .sticky pins the profile at $large; there is nothing to pin any more. */
+.sidebar.sticky {
+  position: static;
+  top: auto;
+}
+
+/* The author-profile include wraps everything in one itemscope div. */
+.sidebar > div[itemscope] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.author__avatar {
+  display: block;
+  width: 64px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 64px;
+          flex: 0 0 64px;
+  vertical-align: top;
+
+  @include breakpoint($small) {
+    width: 76px;
+    -ms-flex: 0 0 76px;
+        flex: 0 0 76px;
+  }
 
   @include breakpoint($large) {
+    display: block;
+    width: 64px;
+    height: auto;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
     padding: 0;
-    border: 1px solid var(--global-border-color);
+    border: 0;
+    border-radius: 2px;
+
+    @include breakpoint($large) {
+      padding: 0;
+      border: 0;
+    }
+  }
+}
+
+/* The include also stamps .author__avatar on the <img> itself. */
+.author__avatar img.author__avatar {
+  width: 100%;
+  max-width: 100%;
+}
+
+.author__content {
+  display: block;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 11rem;
+          flex: 1 1 11rem;
+  padding-left: 1.05rem;
+  padding-right: 0;
+  line-height: 1.3;
+
+  @include breakpoint($large) {
+    display: block;
+    width: auto;
+    padding-left: 1.05rem;
+    padding-right: 0;
   }
 }
 
 .sidebar .author__name {
+  margin: 0 0 0.42rem;
   font-family: $serif;
-  font-size: $type-size-4;
+  font-size: 1.42rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.author__bio {
+  letter-spacing: -0.015em;
+  line-height: 1.08;
   color: var(--global-text-color);
-}
 
-.author__urls {
-  /* "London School of Economics" is wider than the sidebar column, and the
-     template clips it rather than wrapping. */
-  li {
-    white-space: normal;
-    line-height: 1.4;
-    margin-bottom: 0.55em;
-  }
-
-  a {
-    margin-bottom: 0;
-  }
-
-  /* Keep the icon in its own column so wrapped lines stay aligned. */
-  .icon-pad-right {
-    margin-right: 0.15em;
-  }
-}
-
-.sidebar {
-  p, li {
-    font-size: $type-size-7;
+  @include breakpoint($small) {
+    font-size: 1.55rem;
   }
 
   @include breakpoint($large) {
-    padding-right: 1.5em;
+    margin: 0 0 0.42rem;
   }
 }
 
+.sidebar .author__bio {
+  margin: 0;
+  font-family: $sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--global-muted-text-color);
+
+  @include breakpoint($large) {
+    margin: 0;
+  }
+}
+
+.sidebar .author__pronouns {
+  margin: 0.3rem 0 0;
+  font-family: $sans-serif;
+  font-size: 0.7rem;
+  color: var(--global-muted-text-color);
+}
+
+/* The contact block: full width under the name, one line, middot separated. */
+.author__urls-wrapper {
+  display: block;
+  position: static;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 100%;
+          flex: 1 0 100%;
+  margin-top: 1.15rem;
+  cursor: default;
+
+  button {
+    display: none;
+  }
+
+  @include breakpoint($large) {
+    display: block;
+
+    button {
+      display: none;
+    }
+  }
+}
+
+.sidebar .author__urls {
+  display: block;
+  position: static;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  z-index: auto;
+
+  &:before,
+  &:after {
+    display: none;
+  }
+
+  li {
+    display: inline;
+    white-space: normal;
+    margin: 0;
+    padding: 0;
+    font-family: $sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    letter-spacing: 0.045em;
+    line-height: 2;
+    color: var(--global-muted-text-color);
+  }
+
+  li + li:before {
+    content: "\00b7";
+    margin: 0 0.5em;
+    color: var(--global-dark-border-color);
+  }
+
+  /* Icons are redundant next to three words of plain text. */
+  i {
+    display: none;
+  }
+
+  a {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    color: var(--global-muted-text-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--global-link-color);
+
+    &:hover {
+      color: var(--global-link-color);
+      text-decoration: none;
+    }
+  }
+}
+
+/* Location and employer are desktop-only in the template; they belong on the
+   letterhead at every width. */
+.sidebar .author__desktop {
+  display: inline;
+}
+
+
 /* --------------------------------------------------------------------------
-   Footer
+   4. The page label (h1)
+   --------------------------------------------------------------------------
+   "Research" and "Teaching" are not titles, they are the name of the section
+   you are standing in - and the nav already says so. Set as a small tracked
+   uppercase label so that the paper titles below are the largest thing on the
+   page, which is the correct hierarchy for a research page.
+
+   The margin is deliberately zero. On the homepage the template still emits
+   an <h1 class="page__title"> containing only a newline; a whitespace-only
+   line box is zero-height, so with no margin the empty title costs nothing
+   and the homepage opens straight onto its first paragraph. The space under
+   a real title is therefore paid by the first element of .page__content.
+   -------------------------------------------------------------------------- */
+
+.page__title {
+  margin: 0;
+  font-family: $sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--global-text-color);
+
+  & + .page__meta {
+    margin-top: 0;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   5. Prose
+   -------------------------------------------------------------------------- */
+
+.page__content {
+  max-width: none;
+  font-family: $serif;
+  font-size: 1rem;
+  line-height: 1.62;
+  color: var(--global-text-color);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  p {
+    margin: 0 0 1.15em;
+  }
+
+  /* The homepage opens on prose; give the opening paragraph a little more
+     voice. On Research and Teaching the first child is a heading, so this
+     never fires there. */
+  > p:first-child {
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin-bottom: 1em;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Section marker. A rule above it, a tracked label below the rule. */
+  h2 {
+    margin: 2.9rem 0 1.35rem;
+    padding: 1.45rem 0 0;
+    border-top: 1px solid var(--global-dark-border-color);
+    border-bottom: 0;
+    font-family: $sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: var(--global-muted-text-color);
+  }
+
+  /* Under a page label the rule reads as the label's baseline rule, so the
+     two together form a title band. */
+  > h2:first-child {
+    margin-top: 1.15rem;
+    padding-top: 1.3rem;
+  }
+
+  /* Paper titles, and the sub-headings on the teaching page. This is the
+     largest type in the content column, deliberately. */
+  h3 {
+    margin: 2.4rem 0 0;
+    font-family: $serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.008em;
+    line-height: 1.3;
+    color: var(--global-text-color);
+    text-wrap: balance;
+
+    @include breakpoint($small) {
+      font-size: 1.24rem;
+    }
+  }
+
+  h2 + h3 {
+    margin-top: 0;
+  }
+
+  > h3:first-child {
+    margin-top: 0;
+  }
+
+  h4, h5, h6 {
+    margin: 1.9rem 0 0.4rem;
+    font-family: $serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.35;
+    text-transform: none;
+    color: var(--global-text-color);
+  }
+
+  /* Dateline: the year under a paper title, the institution and years under
+     the teaching heading. Sans, small, tracked, muted - the same family as
+     the section markers, so all the non-prose on the page looks alike. */
+  .entry-meta {
+    margin: 0.5rem 0 1.15rem;
+    font-family: $sans-serif;
+    font-size: 0.74rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    color: var(--global-muted-text-color);
+  }
+
+  h2 + .entry-meta {
+    margin-top: -0.55rem;
+  }
+
+  /* The abstract. Journals set the abstract a size down from the body; that
+     is the whole hierarchy this page needs. */
+  .entry-meta + p {
+    margin-bottom: 1.3em;
+    font-size: 0.94rem;
+    line-height: 1.62;
+    color: var(--global-text-color);
+  }
+
+  /* Lists: no discs. A 5px hairline en-rule in the margin, and a hanging
+     indent so wrapped lines align under the first word. */
+  ul {
+    list-style: none;
+    margin: 0.8em 0 1.15em;
+    padding-left: 0;
+  }
+
+  ol {
+    margin: 0.8em 0 1.15em;
+    padding-left: 1.3em;
+  }
+
+  ul > li {
+    position: relative;
+    margin-bottom: 0.45em;
+    padding-left: 1.05em;
+    line-height: 1.55;
+  }
+
+  ul > li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.78em;
+    width: 5px;
+    height: 1px;
+    background: var(--global-dark-border-color);
+  }
+
+  ol > li {
+    margin-bottom: 0.45em;
+    line-height: 1.55;
+  }
+
+  li ul,
+  li ol {
+    margin-top: 0.45em;
+    margin-bottom: 0.2em;
+  }
+
+  li > strong,
+  p > strong {
+    font-weight: 600;
+  }
+
+  /* Links: the accent, with the same colour repeated in the rule beneath.
+     The underline still does the marking - so this satisfies WCAG 1.4.1
+     without relying on colour - but people scan for coloured links, and on
+     the homepage one of the only two links is an email address. */
+  a {
+    color: var(--global-link-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--global-link-color);
+    -webkit-transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+            transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+    &:hover {
+      color: var(--global-link-color);
+      text-decoration: none;
+      border-bottom-color: var(--global-link-color-hover);
+
+      img {
+        box-shadow: none;
+      }
+    }
+  }
+
+  blockquote {
+    margin: 1.8em 0;
+    padding: 0 0 0 1.15em;
+    font-style: normal;
+    color: var(--global-muted-text-color);
+    border-left: 1px solid var(--global-dark-border-color);
+  }
+
+  hr {
+    margin: 2.4rem 0;
+    border-top: 1px solid var(--global-border-color);
+  }
+
+  table {
+    font-family: $serif;
+    font-size: 0.92rem;
+  }
+
+  pre,
+  code {
+    font-size: 0.85rem;
+  }
+
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   6. Footer
+   --------------------------------------------------------------------------
+   No grey band. A hairline, one line of small tracked sans in the same column
+   as the text, and nothing else.
    -------------------------------------------------------------------------- */
 
 .page__footer {
-  font-size: $type-size-7;
-  /* The template reuses the de-emphasis grey here, which falls below 3:1
-     against the footer background. */
+  margin-top: 4em;
+  border-top: 1px solid var(--global-border-color);
   color: var(--global-muted-text-color);
+  animation-delay: 0s;
+
+  footer {
+    max-width: $measure;
+    margin: 0 auto;
+    padding: 1.3rem $gutter 1.6rem;
+
+    @include breakpoint($x-large) {
+      max-width: $measure;
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--global-dark-border-color);
+
+    &:hover {
+      color: var(--global-text-color);
+      text-decoration: none;
+      border-bottom-color: var(--global-text-color);
+    }
+  }
 
   .fas, .fab, .far, .fal {
     color: var(--global-muted-text-color);
   }
+}
 
-  footer {
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
+.page__footer-copyright {
+  font-family: $sans-serif;
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+}
+
+.page__footer-follow {
+  li {
+    font-family: $sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.09em;
+  }
+
+  a {
+    font-weight: 500;
   }
 }
 
+
 /* --------------------------------------------------------------------------
-   Focus and motion
+   7. Article meta, share, pagination - present in the template, unused here,
+      but they should not look foreign if they ever appear.
    -------------------------------------------------------------------------- */
 
-/* Visible keyboard focus - the template relies on the browser default, which
-   the reset removes. */
+.page__meta {
+  font-family: $sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--global-muted-text-color);
+}
+
+.page__share,
+.page__related {
+  border-top: 1px solid var(--global-border-color);
+}
+
+
+/* --------------------------------------------------------------------------
+   8. Focus and motion
+   -------------------------------------------------------------------------- */
+
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--global-link-color);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* The template fades the page in after a 0.35s delay, so the content is blank
-   for a third of a second on every navigation. Show it immediately. */
-#main {
-  animation-delay: 0s;
-  animation-duration: 0.2s;
+  outline-offset: 3px;
+  border-radius: 1px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -262,5 +765,78 @@ button:focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   9. Print - the page is already a document; make it a good one.
+   -------------------------------------------------------------------------- */
+
+@media print {
+  body {
+    font-size: 11pt;
+  }
+
+  #main {
+    max-width: none;
+    padding: 0;
+  }
+
+  .page__content a {
+    border-bottom: 0;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   10. Amendments to Direction A
+   --------------------------------------------------------------------------
+   Two rules grafted from the other design directions after reviewing the
+   built pages. Kept in their own section so it stays clear what is the
+   variant as delivered and what was changed afterwards.
+   -------------------------------------------------------------------------- */
+
+.page__content {
+
+  /* (1) A heading that introduces a record list - "Undergraduate",
+     "Postgraduate" on the Teaching page - is a label, not a title. As
+     delivered it rendered in serif at the h3 size, which made those two words
+     the largest type on that page, ahead of the page label and the course
+     codes that are the thing you actually scan for. Demote them.
+
+     Anchored on :has() deliberately: a browser without :has() support simply
+     keeps the variant's serif heading, which is the previous behaviour rather
+     than a broken one. */
+  h3:has(+ ul),
+  h3:has(+ ol) {
+    margin-top: 2.1em;
+    margin-bottom: 0.55em;
+    font-family: $sans-serif;
+    font-size: $type-size-6;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--global-muted-text-color);
+  }
+
+  /* (2) Papers are separated by margin alone, which reads fine for one entry
+     and blurs once there are several. A hairline before any paper title that
+     follows an abstract keeps a list of papers reading as a list of entries.
+
+     With a single paper on the page today nothing follows an abstract, so
+     this is invisible until a second paper is added - which is the point. */
+  p + h3 {
+    margin-top: 2.4em;
+    padding-top: 2.2em;
+    border-top: 1px solid var(--global-border-color);
+  }
+
+  /* ...but a subsection that merely follows a dateline is not a new entry.
+     This is what keeps the Teaching subheads unruled. */
+  .entry-meta + h3 {
+    margin-top: 1.9em;
+    padding-top: 0;
+    border-top: 0;
   }
 }
