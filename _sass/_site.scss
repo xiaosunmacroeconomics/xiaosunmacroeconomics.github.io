@@ -840,3 +840,35 @@ button:focus-visible {
     border-top: 0;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   11. Chinese name in the letterhead
+   --------------------------------------------------------------------------
+   assets/fonts/name-zh.woff2 is a two-glyph subset (U+5B59, U+6F47) of
+   Zhi Mang Xing (SIL OFL, see assets/fonts/OFL-ZhiMangXing.txt), self-hosted
+   so the page still makes no third-party request. unicode-range confines the face to those two code points, so if
+   the name field ever changes, any other character falls through to the
+   system CJK stack below instead of rendering as a missing glyph.
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Name ZH";
+  src: url("/assets/fonts/name-zh.woff2") format("woff2");
+  font-weight: 100 900;   /* one file serves every weight: no synthetic bold */
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+5B59, U+6F47;
+}
+
+.sidebar .author__name-zh {
+  font-family: "Name ZH", "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "Noto Serif SC", SimSun, serif;
+  /* A running-script face: a touch larger than a printed Kai would need so the
+     brush strokes stay legible, and almost no tracking. */
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+  margin-left: 0.32em;
+  vertical-align: 0.02em;
+  white-space: nowrap;
+  color: var(--global-text-color);
+}

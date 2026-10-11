@@ -20,6 +20,7 @@ repository               : "xiaosunmacroeconomics/xiaosunmacroeconomics.github.i
 # Site Author
 author:
   name             : "Xiao Sun"
+  name_zh          : "孙潇"
   avatar           : "profile.jpg"
   bio              : "PhD Candidate in Economics, LSE"
   location         : "London, UK"
