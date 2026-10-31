@@ -16,7 +16,7 @@ Buera and Kaboski (2009) pose a puzzle in structural transformation: why do sect
 
 ## Work in Progress
 
-### Stable Networks, Falling Growth
+### Stable Supply Chains, Falling Growth
 
 2026
 {: .entry-meta}
