@@ -18,7 +18,7 @@ Buera and Kaboski (2009) pose a puzzle in structural transformation: why do sect
 
 ### Stable Supply Chains, Falling Growth
 
-2026 · [Slides (PDF)](/files/stable-supply-chains-slides.pdf)
+July 2026 · [Slides (PDF)](/files/stable-supply-chains-slides.pdf)
 {: .entry-meta}
 
 US business dynamism has declined, markups have risen, and growth has slowed. I ask what role the supply chain has played since 2000. In Compustat, new supply links deliver a more volatile flow than mature links; links last longer at large, stable suppliers; since 2000, the volatility difference has increased and links have lasted longer; and suppliers with lasting links are large in sales and light in R&D intensity. I build a Schumpeterian growth model where buyers pick the supplier with the lowest effective price, which penalizes volatility. Under limit pricing, a mature leader, whose product is less volatile, charges a higher markup, is harder to take over and has less incentive to innovate. In preliminary simulations, a rising volatility difference lengthens leaders' tenure, raises markups, lowers growth per research worker and, beyond a point, slows growth.
